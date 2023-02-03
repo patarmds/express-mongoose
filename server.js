@@ -1,9 +1,20 @@
 // @/main.js
 const express = require("express");
-var index = require('./app/routes/web')
-
 const app = express();
+var index = require('./app/routes/web')
+const dotenv = require("dotenv");
+const mongoose = require('mongoose')
+dotenv.config();
+
+// Mongo DB conncetion
+const database = process.env.MONGO_URI;
+mongoose.connect(database, {useUnifiedTopology: true, useNewUrlParser: true })
+.then(() => console.log('e don connect'))
+.catch(err => console.log(err));
+
+
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.use("/", index);
 
