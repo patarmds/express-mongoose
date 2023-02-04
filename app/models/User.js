@@ -12,7 +12,11 @@ const UserSchema = new mongoose.Schema({
    type: String,    
    default: "New York",
    },
-  date: {
+  phone_number: {
+    type: Number,
+    required: true
+  },
+  created_at: {
     type: Date,
     default: Date.now,
   },
