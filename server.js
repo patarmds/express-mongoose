@@ -4,6 +4,8 @@ const app = express();
 var index = require('./app/routes/web')
 const dotenv = require("dotenv");
 const mongoose = require('mongoose')
+const cors = require('cors')
+
 dotenv.config();
 
 // Mongo DB conncetion
@@ -15,6 +17,12 @@ mongoose.connect(database, {useUnifiedTopology: true, useNewUrlParser: true })
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // For legacy browser support
+}
+
+app.use(cors(corsOptions));
 
 app.use("/", index);
 
